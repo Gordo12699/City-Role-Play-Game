@@ -4,3 +4,7 @@ Title: City Role Play Game
 Author: Gordo12699
 
 That game-mode where you live in a city.
+
+INSTALLATION INSTRUCTIONS:
+
+GAME-MODE SET UP INSTRUCTIONS:
