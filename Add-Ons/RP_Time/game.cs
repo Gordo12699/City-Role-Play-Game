@@ -47,12 +47,9 @@ function RPTick()
 	
 	// Increase hour
 	$RP::pref::timeHour++;
-	// Increase day
-	if ($RP::pref::timeHour > 24)
+	
+	if($RP::pref::timeHour == 5)
 	{
-		$RP::pref::timeHour = 1;
-		$RP::pref::timeDay++;
-		
 		//Sync DayCycle with RP Time
 		if (!isObject(DayCycle)) 
 		{
@@ -68,10 +65,16 @@ function RPTick()
 
 		%all = strReplace(getWord(getDateTime(), 1), ":", " ");
 
-		%real = $RP::pref::timeHour * 3600 + $RP::pref::timeHour * 60 + (60 - mCeil((getTimeRemaining(RPDB.scheduleTick) / $RP::pref::game::tick) * 0.001));
+		%real = 1 * 3600 + 1 * 60 + (60 - mCeil((getTimeRemaining(RPDB.scheduleTick) / $RP::pref::game::tick) * 0.001));
 		%curr = $Sim::Time / (($RP::pref::game::tick * 24) * 60);
 
 		DayCycle.setDayOffset(%real - (%curr - mFloor(%curr)));
+	}
+	// Increase day
+	if ($RP::pref::timeHour > 24)
+	{
+		$RP::pref::timeHour = 1;
+		$RP::pref::timeDay++;
 	}
 	// Leap year
 	%days = $Date::monthDays[$RP::pref::timeMonth];
