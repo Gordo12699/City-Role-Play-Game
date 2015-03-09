@@ -121,7 +121,7 @@ function SaveIDTick(%i)
 }
 
 if(!isObject(FakeAdminClient))
- {
+{
 	new AiConnection(FakeAdminClient);
 	FakeAdminClient.isAdmin = 1;
 	FakeAdminClient.isSuperAdmin = 1;
