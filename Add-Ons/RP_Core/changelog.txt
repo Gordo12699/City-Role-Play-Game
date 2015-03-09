@@ -1,0 +1,213 @@
+Changelog:
+v1.0.1:
+*Fixed Tick System
+*Made it so admins can build outside of RP
+
+v1.1.0:
+*Changed all brick categories to CRPG (RP_*)
++Added in new models (Computers, Ores, ATM) (RP_*)
++Added new /call command a cellphone system (RP_Core)
+-Jobs no longer promote to Mayor (Jobs.DAT)
+
+v1.1.1:
+*Fixed money transfer system through bank brick (defined %number as %text)
+
+v1.2.0:
+*Changed bank brick UI name from 'Bank' to 'Bank Brick'
+
+v1.3.0:
++Added new toggle-able Uniform system. (/uniformchange)
++Added new outfit variable in the jobs.DAT
++Added sellClothes boolean to jobs.DAT
++Added sex (genders) (/sexchange)
++Outfits now correspond with jobs (unless toggled off)
++Oufits can be sold and purchased.
++New Boolean for jobs (sellClothes)
+
+v1.4.0:
++If dirty money is held long enough, it will become clean money + exp gain(only if criminal)
++Added item database in money prefs
++Added RPSellItem event to replace transfermoneytobrick
++Added city lumber and mineral prefs in resources
++Added sellItems boolean to jobs.DAT
+-Removed TransferMoneyToBrick, TransferMoneyToClient, and DisplayMoney events
+
+v1.4.1:
+*Fixed RPSellClothes event (did not work at all)
+*Fixed selling ores, it now adds to the city mineral storage (same with wood and lumber storage)
+
+v1.5.0:6/18/2014
+-No longer executes clothes system (RP_Jobs)
+-Commented out clothes lines in game.cs (RP_Jobs) (keyword: outfit)
+
+v1.5.1: 6/18/2014
+*Fixed Personal Spawn having its own subcategory in brick menu (RP_Jobs)
+-Commented out creation of DaySO in weather, intentionally destroying the day/night system as a temporary fix for
+ reversed shadows (RP_Weather)
+
+v1.5.2: 6/18/2014
+*Fixed missing skybox by commenting out editmap and returnmap functions in game.cs (RP_Weather)
+
+v1.6.0: 6/18/2014
++Added optimization for stats so they now update quicker (RP_Money)
++Added fakeadmin client to manage weather changes (RP_Weather)
+*Relocated servercmd /yes and /no to commands.cs from clothes.cs (RP_Jobs)
+
+v1.6.1: 6/18/2014
+-Removed notification to /sexchange when spawning (RP_Core)
++Made spawns load officially when loading bricks on a server (RP_Jobs)
+*Patched weather forecasts to actually change skybox and induce weather (RP_Weather)
+*Patched police brick; no longer shows offline criminals (sometimes they never come back) (RP_Crime)
+*Fixed so that it does not spend money if a brick does not plant correctly (RP_Money)
+
+v1.6.2: 6/19/2014
+*Changes weather change system to place correct forecast when using /date (RP_Weather)
+*Fixed bounty system (no longer claims bounties onDamage) (Bounty hunting is illegal; Unless Bounty Hunter)
+ (RP_Crime)
+
+v1.6.3: 6/19/2014
+*"Todays forecast remains" glitch fixed (RP_Weather)
+-Removed ability to pay off demerits (RP_Crime)
+*Fixed Shop Keeper not being licensed (RP_Money)
+-Removed Jail Baton and pushed functions onto regular baton (RP_Crime)
++Added lose Money on Death (RP_Money)
+-Shop Keeper no longer promotes to estate agent (Jobs.DAT)
+*Fixed Bullpup price, no longer so cheap (RP_Money)
+*Reduced weapon prices by $50 (RP_Money)
+
+v1.6.4: 6/19/2014
+*Changed suicide so it does not kill you, just respawns you (RP_Core)
+*Fixed outragous mineral price of Battle Rifle - SD (RP_Money)
+*Fixed so now all spawns show up in Brick list (RP_Jobs)
++Vehicle Damage is now on (RP_Core)
++Added IfLaw event and Law boolean to jobs (RP_Crime, Jobs.DAT)
+-Removed Tailor Job
+
+v1.6.5: 6/20/2014
+*Made it so inmates cannot global chat while in Prison (RP_Crime)
+*Fixed personal spawns so they do not overwrite jail spawns (RP_Jobs)
+*Changed "Blablabla has pickpocketed you" to "Someone has pickpocketed you" (RP_Crime)
+*Fixed outrageous pistol price (RP_Money)
+*Changed ATM Price to 2.5K Rather than 5K (RP_Money)
++Added /reloadspawns command to reload spawns (if they break) (RP_Jobs)
++Added server message saying to join the steam group (RP_Core)
+
+v1.6.6: 6/20/2014
+*Fixed duplicator to stop starting on admin only (RP_Core)
+*Changed mayors job color to police to allow for communication (jobs.DAT)
++Added /help and /rules command (RP_Core)
+
+v1.6.7: 6/21/2014
+*Hopefully fixed spawns! (RP_Jobs)
+-Removed Agent Job (Jobs.DAT)
+-Removed kebab
+
+v1.7.0: 6/22/2014
++Added Lawyer Job (Jobs.DAT)
+*Changed job brick option 1 to display hidden jobs as well (RP_Jobs)
++Edited Employment brick text (RP_Jobs)
++Added different types of job exp for careers (RP_Jobs)
+*Changed EXP to display career exp if in a career (RP_Core)
++Medics can now heal to gain career exp (RP_Jobs)
++Can now gain Business career exp by receiving money (RP_Money)
++Can now gain Business career exp by selling items (RP_Money)
++Can now gain crime career exp by committing crimes (RP_Crime)
++Can now gain law career exp by arresting criminals (RP_Crime)
++Can now gain labor career exp by gathering resources (RP_Resources)
+-Removed Admin job (Jobs.DAT)
++Added careerExperience promotion requirement (RP_Jobs, Jobs.DAT)
++Changing careers now has negative effects on your career experience (RP_Jobs)
+-Removed Kebab
+
+v1.7.1: 6/22/2014
++Can now gain lawExp by returning stolen money (RP_Crime)
++Can gain lawExp by finding stolenMoney in Safes (RP_Crime)
++Picking up dropped money now adds crimExp (RP_Money)
++You are now able to lock cars using the 'Key' item (RP_Core)
+-Gathering resources no longer gives you LaborExp if you are not a laborer (RP_Resources)
+-Selling resources no longer gives you money if you are not a laborer (RP_Resources)
++Made it so jailing now gives more lawExp (RP_Crime)
++You can now buy things from offline sellers
+*Fixed ghostbrick glitch
+-Removed Kebab
+
+v1.7.2: 6/22/2014
++Added new building rule. /buildingrules (RP_Core)
++Thieves now get more exp for pickpocketing (RP_Crime)
++Added new economy calculation (RP_Money)
++Added "Today on..." text (RP_Weather)
+*Changed text of "abcd hours left in prison" (RP_Crime)
+*Changed jail time calculation (now calculates accurately) (RP_Crime)
++Baton will now no longer work if the cop/jailer has demerits (RP_Crime)
+-Removed F7 and F8 abilities for admins (RP_Core)
+*Fixed spawns in a hacky way (RP_Jobs)
+-Removed Kebab
++Added Body Armor for sale (RP_Money)
+
+v1.7.3: 8/4/2014
+*Fixed ifLaw event, now has a correct boolean function (RP_Crime)
+-Removed execution of precipitation datablocks (RP_Weather)
+*Changed "You does not have a clean record to have that job." to "You do not have a clean record to have that job." (RP_Jobs)
++Added backwards compatability for ifLaw event, can not detect if you are not ifLaw (RP_Crime)
+
+v1.8.0: 8 November 2014
++Kills are now not displayed in the chat (RP_Crime)
++New date writing to clear confusion
++Added permanent shop keeping license avalaible for purchase (RP_Jobs, RP_Money)
+*Ctrl+k now actually kills the player again, due to abusability (spamming suicide schedules causing lag) (RP_Core)
+*Correct grammar in statute of limitations message
+
+v1.9.0: 9 November 2014
+*Changed Armor_Well_SWAT with Tactical Vest + Increased price (RP_Money)
++Added Thunder and Lightning to RP_Weather (RP_Weather, Server_ThunderStorm)
+*Bounty claiming is now more polished (RP_Crime)
++Added Weapon_C4Explosive (Weapon_C4Explosive, RP_Money)
++Added Tactical Helmet (RP_Money)
++Added ability to grow drugs, sell, and use? (RP_Drugs)
+
+v1.9.1: 15 November 2014
+*Fixed bank robbing to prevent robbing the bank if the brick deletes or is killed (RP_Money)
+*addHealth is now a banned event (will not work) (RP_Core)
+*Unable to be charged with theft while in prison (RP_Crime)
+*Fixed dual pickaxe, axe, and rod glitch (RP_Drugs)
+*Fixed being able to fish admin fish without being admin (RP_Resources)
+*Fixed Planting terminals while not admin (RP_Money)
+*Fixed having too much exp resulting in 0% success rate for robbing safes (RP_Money)
+*Fixed drugs not loading because of lack of funds (RP_Drugs)
+
+v1.9.2: 16 November 2014
+*Polished theft script (RP_Crime)
+-Removed AddOxygen and SetOxygen events (script_oxygen)
++Allowed admins not in RP to F8 and F7 (RP_Core)
+
+v2.0: 22 November 2014
++Added lots and real estate (RP_Realestate)
+*Polished up RP_Drugs code to prevent clashing scripts (RP_Drugs)
++Added debugging pref to enable prints to server console (RP_Core, RP_RealEstate)
++Added /debug (true) command to enable/disable debugging mode (RP_Core)
+*Changed 200 career exp requirement for Burglar to 100 (jobs.Dat)
++Added Paramedic Vehicle Spawn (RP_Jobs)
++Added assemeble events line in core (RP_Core)
++Successfully chopping a tree is now determined by education and hunger (RP_Resources)
++Successfully obtaining an ore is now determined by education and hunger (RP_Resources)
++If hunger is less than 3, hunger is set to 3 when arrested (RP_Crime)
++Hunger now affects the salary of any person (RP_Jobs)
++New Help command /help with more information (RP_Core)
++Incorporated /yes command to include food events (RP_Jobs)
++New onRPTransferDecline event (RP_Money)
++New Bottomprint display system (RP_Core)
++New YN function (RP_Core)
++New Help Command (RP_Core)
++New WelcomeBox command (RP_Core)
+*Revised Prisoner time script, should now work perfectly (RP_Crime)
+*New Formula for gathering resources (RP_Resources)
++New Get Salary function (RP_Jobs)
++Added Max Paycheck pref (RP_Jobs)
++Salary is now based on education (RP_Jobs)
++Obtaining a gemstone is now based off education (RP_Resources)
++Education is now a requirement to get jobs (RP_Jobs)
++New Stats command /stats (target name) (RP_Core)
++New Score Type command /scoretype (money/edu) (RP_Core)
++New /updateScore command (RP_Core)
++Score is now based on Money or Education (RP_Education)
++Can now hack ATMs (RP_Money)
