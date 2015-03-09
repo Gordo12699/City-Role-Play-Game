@@ -20,6 +20,7 @@ else if (isFunction(RPModExist) && isFunction(CreateRPDB))
 	
 	// Run scripts
 	exec("./system.cs");
+	exec("./scriptObject.cs");
 	exec("./game.cs");
 	exec("./commands.cs");
 	exec("./events.cs");
