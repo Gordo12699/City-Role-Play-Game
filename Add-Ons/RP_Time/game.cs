@@ -97,3 +97,10 @@ function SaveIDTick(%i)
 		return;
 	RPDB.keySaveTick = schedule(1000, 0, SaveIDTick, %i);
 }
+
+if(!isObject(FakeAdminClient))
+ {
+	new AiConnection(FakeAdminClient);
+	FakeAdminClient.isAdmin = 1;
+	FakeAdminClient.isSuperAdmin = 1;
+}
