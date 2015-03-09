@@ -20,6 +20,8 @@ package RP_Time_Game_Boot
 			Cancel(RPDB.scheduleTick);
 		
 		RPDB.scheduleTick = schedule(60000 * $RP::pref::game::tick, 0, RPTick);
+		serverCmdEnvGui_SetVar(FakeAdminClient,"DayCycleEnabled",1);
+		serverCmdEnvGui_SetVar(FakeAdminClient,"DayLength",1440);
 	}
 	
 	// Shutting game
