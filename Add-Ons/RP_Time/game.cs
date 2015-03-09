@@ -21,7 +21,7 @@ package RP_Time_Game_Boot
 		
 		RPDB.scheduleTick = schedule(60000 * $RP::pref::game::tick, 0, RPTick);
 		serverCmdEnvGui_SetVar(FakeAdminClient,"DayCycleEnabled",1);
-		serverCmdEnvGui_SetVar(FakeAdminClient,"DayLength",1440);
+		serverCmdEnvGui_SetVar(FakeAdminClient,"DayLength", ($RP::pref::game::tick * 24) * 60);
 	}
 	
 	// Shutting game
@@ -52,6 +52,26 @@ function RPTick()
 	{
 		$RP::pref::timeHour = 1;
 		$RP::pref::timeDay++;
+		
+		//Sync DayCycle with RP Time
+		if (!isObject(DayCycle)) 
+		{
+			error("ERROR: DayCycle does not exist.");
+			//return;
+		}
+
+		if (DayCycle.dayLength != ($RP::pref::game::tick * 24) * 60) 
+		{
+			error("ERROR: DayCycle length is not equal to RP Day Length.");
+			//return;
+		}
+
+		%all = strReplace(getWord(getDateTime(), 1), ":", " ");
+
+		%real = $RP::pref::timeHour * 3600 + $RP::pref::timeHour * 60 + (60 - mCeil((getTimeRemaining(RPDB.scheduleTick) / $RP::pref::game::tick) * 0.001));
+		%curr = $Sim::Time / (($RP::pref::game::tick * 24) * 60);
+
+		DayCycle.setDayOffset(%real - (%curr - mFloor(%curr)));
 	}
 	// Leap year
 	%days = $Date::monthDays[$RP::pref::timeMonth];
