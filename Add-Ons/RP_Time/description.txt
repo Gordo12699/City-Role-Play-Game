@@ -1,0 +1,3 @@
+Title: RP Time
+Author: McTwist
+With RP Core, it displays the RP time for the server.
