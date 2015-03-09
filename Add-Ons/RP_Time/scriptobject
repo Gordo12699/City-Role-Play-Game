@@ -1,9 +1,4 @@
-if(!isObject(WeatherSO))
-{
-	new scriptObject(WeatherSO) { };
-}
-
-function WeatherSO::loadEnvironment(%file)
+function loadEnvironment(%file)
 {
   %res = GameModeGuiServer::parseGameModeFile(%file, 1);
 
@@ -17,7 +12,7 @@ function WeatherSO::loadEnvironment(%file)
   }
 }
 
-function WeatherSO::setEnvironment(%varName, %value)
+function setEnvironment(%varName, %value)
 {
   if ($EnvGuiServer["::" @ %varName] $= %value)
     return;
