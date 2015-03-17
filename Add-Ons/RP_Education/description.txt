@@ -1,0 +1,3 @@
+Title: RP Hunger
+Author: Gordo12699
+Hunger module for an RP Server. For use with RP Core
