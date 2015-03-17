@@ -1,0 +1,375 @@
+v1
+// This is a commentline
+// Last ID: 26
+// ***************************************************************
+//   Boolean info - Used to define job's special abilities
+// ***************************************************************
+//   hidden      - Hides job in EO to only be used for promotion
+//   build       - User can build
+//   paint       - User can paint
+//   clean       - User has to have a clean record to have this job
+//   pardon      - User can take out prisoners and erase their criminal record (jail data)
+//   immunity    - User can kill without gain demerits
+//   placeBounty - Can place bounty - Not working
+//   gainBounty  - Can gain bounty - Not working
+//   sellable    - Can place Sell-able lots
+//   industry    - Can place Industrial lots
+//   landplot    - Can place Landplots
+//   breakSafe   - User can break safes open
+//   clearRecord - User can clear an another person's record
+// ***************************************************************
+// All group have an unique color
+// Average is how much money you receive each day
+// ***************************************************************
+
+//*****************************************************************************
+//						Default Job
+// Average: 0
+ID 1
+ name Tourist
+ info Visitors.
+ group FFFFFF
+ experience 0
+ pay 0
+ tools Printer
+ boolean hidden
+
+//*****************************************************************************
+//						Start Job
+// Average: 10
+ID 2
+ name Civilian
+ info Average person you meet in the streets.
+ group FFFFFF
+ experience 0
+ pay 10
+ paytime 11
+ tools Hammer 	Wrench	Printer
+ boolean build paint
+
+//*****************************************************************************
+//						Laborer Career
+// Average: 20
+ID 20
+ name Miner
+ info Mines ores.
+ group 999999
+ experience 0
+ pay 20
+ paytime 21
+ tools Hammer 	Wrench	Printer	Pickaxe	RPG Pickaxe
+ promotion 19
+ requireMod Resources
+ boolean build paint
+
+// Average: 20
+ID 21
+ name Lumberjack
+ info Chops down trees.
+ group 999999
+ experience 0
+ pay 20
+ paytime 21
+ tools Hammer 	Wrench	Printer	Axe	RPG Axe
+ promotion 19
+ requireMod Resources
+ boolean build paint
+
+// Average: 20
+ID 25
+ name Fisherman
+ info Fishes fishes.
+ group 999999
+ experience 0
+ pay 20
+ paytime 21
+ tools Hammer 	Wrench	Printer	Rod
+ promotion 19
+ requireMod Resources
+ boolean build paint
+
+// Average: 50
+ID 19
+ name Laborer
+ info Harvests resources.
+ group 999999
+ experience 4000
+ pay 50
+ paytime 21
+ tools Hammer 	Wrench	Printer	Axe	Pickaxe	Rod	RPG Axe	RPG Pickaxe
+ requireMod Resources
+ boolean build paint hidden
+
+//*****************************************************************************
+//						Criminal Career
+// Average: 0
+ID 3
+ name Thief
+ info Pickpockets money from people.
+ group 333333
+ experience 0
+ pay 0
+ tools Hammer 	Wrench	Printer
+ special pickpocket 20
+ promotion 17
+ requireMod Crime
+ boolean build paint
+
+// Average: 0
+ID 17
+ name Burglar
+ info Breaks into homes and loots safes.
+ group 333333
+ experience 2000
+ pay 0
+ tools Hammer 	Wrench	Printer	Picklock
+ promotion 4
+ requireMod Crime
+ boolean build paint hidden breakSafe
+
+// Average: 0
+ID 4
+ name Bankrobber
+ info Steal from other's bank accounts.
+ group 333333
+ exerience 4000
+ pay 0
+ tools Hammer 	Wrench	Printer
+ special bankrobbing 50000
+ promotion 24
+ requireMod Crime
+ boolean build paint hidden
+
+// Average: 1300
+ID 24
+ name Criminal Mastermind
+ info Only the most intelligent and nimble criminals reach this state.
+ group 333333
+ experience 8000
+ pay 1300
+ payTime 24
+ tools Hammer 	Wrench	Printer	Picklock
+ items crowbarItem mac10Item P90Item P90SItem KrakenItem shotgunItem
+ promotion 23
+ requireMod Crime
+ boolean build paint hidden
+
+// Average: 0
+ID 5
+ name Bounty Hunter
+ info Hunt for bounties to gain money.
+ group 333333
+ experience 1000
+ pay 0
+ tools Hammer 	Wrench	Printer
+ requireMod Crime
+ boolean build paint gainBounty
+
+//*****************************************************************************
+//						Law Enforcement Career
+// Average: 110
+ID 22
+ name Jail Guard
+ info Keeps inmates in jail.
+ group CCCC00
+ experience 150
+ pay 10
+ payTime 6 18
+ tools Hammer 	Wrench	Printer	Jail Baton
+ promotion 6
+ requireMod Crime
+ boolean build paint clean
+
+// Average: 70
+ID 6
+ name Police Assistant
+ info Jails criminals.
+ group CCCC00
+ experience 500
+ pay 10
+ payTime 8 16
+ tools Hammer 	Wrench	Printer	Baton
+ promotion 7
+ requireMod Crime
+ boolean build paint clean hidden
+
+// Average: 280
+ID 7
+ name Police Inspector
+ info Jails criminals.
+ group CCCC00
+ experience 2000
+ pay 40
+ payTime 9 17
+ tools Hammer 	Wrench	Printer	Baton
+ special demerits
+ promotion 8
+ requireMod Crime
+ boolean build paint clean hidden
+
+// Average: 650
+ID 8
+ name Police Chief
+ info Jails criminals. Can pardon people.
+ group CCCC00
+ experience 4000
+ pay 50
+ payTime 7 21
+ tools Hammer 	Wrench	Printer	Baton
+ promotion 11
+ requireMod Crime
+ boolean build paint clean hidden pardon
+
+// Average: 1100
+ID 11
+ name Agent
+ info Has the license to kill and can gain bounties, but doesn't have a Baton.
+ group CCCC00
+ experience 8000
+ pay 50
+ paytime 1 24
+ tools Hammer 	Wrench	Printer
+ promotion 23
+ requireMod Crime
+ boolean build paint clean gainBounty hidden hideName pardon immunity
+
+//*****************************************************************************
+//						Business Career
+// Average: 50
+ID 16
+ name Employee
+ info The very first job to success.
+ group 0000CC
+ experience 0
+ pay 50
+ payTime 12
+ tools Hammer 	Wrench	Printer
+ promotion 12
+ boolean build paint
+
+// Average: 300
+ID 12
+ name Shop Keeper
+ info Sells various items, tools and weapons.
+ group 0000CC
+ experience 300
+ pay 300
+ payTime 21
+ tools Hammer 	Wrench	Printer
+ items hammerItem wrenchItem printGun crowbarItem mac10Item P90Item P90SItem KrakenItem shotgunItem hrgrenadeItem nameGun
+ promotion 10
+ boolean build paint food hidden
+
+// Average: 320
+ID 10
+ name Estate Agent
+ info Buy and sell lots.
+ group 0000CC
+ experience 4000
+ pay 40
+ payTime 12 18
+ tools Hammer 	Wrench	Printer
+ promotion 18
+ requireMod RealEstate
+ boolean build paint sellable hidden
+
+// Average: 300
+ID 18
+ name Landlord
+ info Manages multiple lots.
+ group 0000CC
+ experience 6000
+ pay 300
+ payTime 21
+ tools Hammer 	Wrench	Printer
+ special taxlimit 60
+ promotion 13
+ requireMod RealEstate
+ boolean build paint hidden industrial landplot
+
+// Average: 1400
+ID 13
+ name Businessman
+ info Top job. Huge income.
+ group 0000CC
+ experience 8000
+ pay 200
+ payTime 10 18
+ tools Hammer 	Wrench	Printer
+ items hammerItem wrenchItem printGun crowbarItem mac10Item P90Item P90SItem KrakenItem shotgunItem hrgrenadeItem nameGun
+ promotion 23
+ requireMod RealEstate
+ boolean build paint hidden industrial sellable
+
+//*****************************************************************************
+//						Medical Career
+// Average: 275
+ID 14
+ name Medic
+ info Heal people.
+ group CC00CC
+ experience 200
+ pay 25
+ payTime 9 21
+ tools Hammer 	Wrench	Printer
+ special heal 10
+ promotion 15
+ boolean build paint
+
+// Average: 1015
+ID 15
+ name Doctor
+ info Heals people.
+ group CC00CC
+ experience 6000
+ pay 145
+ payTime 10 18
+ tools Hammer 	Wrench	Printer
+ special heal 30
+ boolean build paint hidden
+
+//*****************************************************************************
+//						Civic Career
+// Average: 5000
+ID 23
+ name Mayor
+ info Clear peoples record and pardon people.
+ group FFCC00
+ experience 12000
+ pay 5000
+ payTime 6
+ tools Hammer 	Wrench	Printer
+ item hammerItem wrenchItem printGun crowbarItem mac10Item P90Item P90SItem KrakenItem shotgunItem hrgrenadeItem nameGun
+ boolean build paint industrial landplot placeBounty hidden pardon clearRecord
+
+//*****************************************************************************
+//						Inmate Career
+// Average: 0
+ID 26
+ name Inmate
+ info Jailed criminals.
+ group FFFFFF
+ experience 0
+ pay 0
+ boolean paint hidden
+
+//*****************************************************************************
+//						Miscellaneous Jobs
+//ID X
+// name Taxidriver
+
+//*****************************************************************************
+//						Admin Career
+// Average: 5000
+ID 1337
+ name Admin
+ info Admin only.
+ group FFCC00
+ experience 50000
+ pay 5000
+ paytime 6
+ tools Hammer 	Wrench	Printer
+ items hammerItem wrenchItem printGun
+ special demerits
+ datablock PlayerStandardArmor
+ boolean build paint sellable industrial landplot placeBounty gainBounty hidden hideName pardon immunity clearRecord
