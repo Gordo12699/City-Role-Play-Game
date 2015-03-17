@@ -1,0 +1,3 @@
+Get $ATM::Min, $ATM::Max prefs and convert the ATM Hacking to commitcrime with $ATM::Demerits pref
+Get resetAccessableATM function
+Get $CityRPG::pref::hack::education pref
