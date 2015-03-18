@@ -811,10 +811,17 @@ package CRPG_MainRealEstatePackage
 	// ============================================================
 	// Section 5 : Chat Functions/Packages
 	// ============================================================	
-	function serverCmdmessageSent(%client, %text)
+	function serverCmdMessageSent(%client, %text)
 	{
-		if(isObject(%client.player) && isObject(%client.CRPGTrigger) && isObject(%client.CRPGTrigger.parent) && %client.CRPGTrigger.parent.getDatablock().CRPGBrickType == 2)
+		if(isObject(%client.player) && 
+		   isObject(%client.CRPGTrigger) && 
+		   isObject(%client.CRPGTrigger.parent) && 
+		   %client.CRPGTrigger.parent.getDatablock().CRPGBrickType == 2)
+		{
 			%client.CRPGTrigger.parent.getDatablock().parseData(%client.CRPGTrigger.parent, %client, "", %text);
+		}
+		
+		parent::serverCmdMessageSent(%client, %text);
 	}
 };
 activatePackage(CRPG_MainRealEstatePackage);
