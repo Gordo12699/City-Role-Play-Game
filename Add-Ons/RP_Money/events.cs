@@ -238,7 +238,7 @@ function fxDTSBrick::RPsellItem(%brick, %item, %markup, %client)
 		messageClient(%client, '', "\c6You already have a charge request from another service! Type \c3/no\c6 to reject it.");
 }
 
-function gameConnection::sellItem(%client, %sellerID, %itemID, %price, %profit)
+function gameConnection::RPsellItem(%client, %sellerID, %itemID, %price, %profit)
 {
 	if(isObject(%client.player) && %client.RPData.value["money"] >= %price)
 	{
