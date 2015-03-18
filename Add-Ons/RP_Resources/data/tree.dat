@@ -1,0 +1,61 @@
+v1
+
+TYPE TREE
+ name Pine
+ resources 1
+ each 1
+ hardCore 60
+ colorHasRes 4
+ colorHasNoRes 38
+ reGrow 10
+ plantAdminOnly 0
+
+TYPE TREE
+ name Maple
+ resources 2
+ each 1
+ hardCore 65
+ colorHasRes 32
+ colorHasNoRes 38
+ reGrow 20
+ plantAdminOnly 0
+
+TYPE TREE
+ name Teak
+ resources 3
+ each 1
+ hardCore 70
+ colorHasRes 31
+ colorHasNoRes 38
+ reGrow 30
+ plantAdminOnly 0
+
+TYPE TREE
+ name Oak
+ resources 6
+ each 1
+ hardCore 75
+ colorHasRes 58
+ colorHasNoRes 38
+ reGrow 40
+ plantAdminOnly 0
+
+TYPE TREE
+ name Cedar
+ resources 10
+ each 1
+ hardCore 80
+ colorHasRes 62
+ colorHasNoRes 38
+ reGrow 50
+ plantAdminOnly 1
+
+TYPE TREE
+ name Mahogany
+ resources 15
+ each 1
+ hardCore 90
+ colorHasRes 61
+ colorHasNoRes 38
+ reGrow 60
+ plantAdminOnly 1
