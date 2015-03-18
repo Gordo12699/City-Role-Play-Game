@@ -75,8 +75,7 @@ ID 20
  group 999999
  experience 0
  careerExperience 0
- pay 20
- paytime 21
+ pay 0
  tools Hammer 	Wrench	Printer	Pickaxe	RPG Pickaxe
  promotion 19
  requireMod Resources
@@ -90,8 +89,7 @@ ID 21
  group 999999
  experience 0
  careerExperience 0
- pay 20
- paytime 21
+ pay 0
  tools Hammer 	Wrench	Printer	Axe	RPG Axe
  promotion 19
  requireMod Resources
@@ -105,8 +103,7 @@ ID 25
  group 999999
  experience 0
  careerExperience 0
- pay 20
- paytime 21
+ pay 0
  tools Hammer 	Wrench	Printer	Rod
  promotion 19
  requireMod Resources
@@ -120,8 +117,6 @@ ID 19
  group 999999
  experience 4000
  careerExperience 400
- pay 50
- paytime 21
  tools Hammer 	Wrench	Printer	Axe	Pickaxe	Rod	RPG Axe	RPG Pickaxe
  requireMod Resources
  outfit none brownhat keep keep greenshirt greenshirt skin greyPants blackshoes default default
