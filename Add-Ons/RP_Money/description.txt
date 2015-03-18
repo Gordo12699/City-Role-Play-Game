@@ -1,0 +1,3 @@
+Title: RP Money
+Author: McTwist
+Adds a moneysystem to RP Core.
