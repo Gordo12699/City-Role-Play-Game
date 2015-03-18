@@ -1,0 +1,3 @@
+Title: RP Realestate
+Author: Gordo12699
+A real estate module for the RP_Core add-ons.
