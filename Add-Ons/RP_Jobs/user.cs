@@ -103,11 +103,10 @@ package RP_Jobs_User
 						if(%datablock.spawnData $= "jobSpawn " @ %client.RPData.value["jobID"])
 						{
 							%spawn = %brick.getTransform();
-						}
-						
-						if(%spawn $= "")
-						{
-							%spawn = %touristSpawn;
+							if(%spawn $= "")
+							{
+								%spawn = %touristSpawn;
+							}
 						}
 					}
 				}
