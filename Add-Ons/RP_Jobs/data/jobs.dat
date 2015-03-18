@@ -1,6 +1,6 @@
-v1
+v2
 // This is a commentline
-// Last ID: 26
+// Last ID: 27
 // ***************************************************************
 //   Boolean info - Used to define job's special abilities
 // ***************************************************************
@@ -17,9 +17,24 @@ v1
 //   landplot    - Can place Landplots
 //   breakSafe   - User can break safes open
 //   clearRecord - User can clear an another person's record
+//   sellClothes - User can sell clothes via events
+//   sellItems   - User can sell items via events
+//   sellFood    - User can sell food via events
+//   sellServices- User can sell services via events
+//   thief       - No Use - Tells scripts which jobs can pickpocket or not (/help command)
 // ***************************************************************
 // All group have an unique color
 // Average is how much money you receive each day
+// ***************************************************************
+//   Groups
+// ***************************************************************
+//   Civilian              - FFFFFF
+//   Labor                 - 999999
+//   Criminal              - 333333
+//   Law Enforcement       - CCCC00
+//   Business              - 0000CC
+//   Medical               - CC00CC
+//   Political             - CCCC00
 // ***************************************************************
 
 //*****************************************************************************
@@ -30,8 +45,10 @@ ID 1
  info Visitors.
  group FFFFFF
  experience 0
+ careerExperience 0
  pay 0
  tools Printer
+ outfit none none none none whitet whitet skin bluejeans blackshoes default default
  boolean hidden
 
 //*****************************************************************************
@@ -42,9 +59,11 @@ ID 2
  info Average person you meet in the streets.
  group FFFFFF
  experience 0
+ careerExperience 0
  pay 10
  paytime 11
  tools Hammer 	Wrench	Printer
+ outfit none none none none whitet whitet skin bluejeans blackshoes default default
  boolean build paint
 
 //*****************************************************************************
@@ -55,12 +74,14 @@ ID 20
  info Mines ores.
  group 999999
  experience 0
+ careerExperience 0
  pay 20
  paytime 21
  tools Hammer 	Wrench	Printer	Pickaxe	RPG Pickaxe
  promotion 19
  requireMod Resources
- boolean build paint
+ outfit none brownhat keep keep greenshirt greenshirt skin greyPants blackshoes default default
+ boolean build paint laborer
 
 // Average: 20
 ID 21
@@ -68,12 +89,14 @@ ID 21
  info Chops down trees.
  group 999999
  experience 0
+ careerExperience 0
  pay 20
  paytime 21
  tools Hammer 	Wrench	Printer	Axe	RPG Axe
  promotion 19
  requireMod Resources
- boolean build paint
+ outfit none brownhat keep keep greenshirt greenshirt skin greyPants blackshoes default default
+ boolean build paint laborer
 
 // Average: 20
 ID 25
@@ -81,12 +104,14 @@ ID 25
  info Fishes fishes.
  group 999999
  experience 0
+ careerExperience 0
  pay 20
  paytime 21
  tools Hammer 	Wrench	Printer	Rod
  promotion 19
  requireMod Resources
- boolean build paint
+ outfit none brownhat keep keep greenshirt greenshirt skin greyPants blackshoes default default
+ boolean build paint laborer
 
 // Average: 50
 ID 19
@@ -94,11 +119,13 @@ ID 19
  info Harvests resources.
  group 999999
  experience 4000
+ careerExperience 400
  pay 50
  paytime 21
  tools Hammer 	Wrench	Printer	Axe	Pickaxe	Rod	RPG Axe	RPG Pickaxe
  requireMod Resources
- boolean build paint hidden
+ outfit none brownhat keep keep greenshirt greenshirt skin greyPants blackshoes default default
+ boolean build paint hidden laborer
 
 //*****************************************************************************
 //						Criminal Career
@@ -108,37 +135,43 @@ ID 3
  info Pickpockets money from people.
  group 333333
  experience 0
+ careerExperience 0
  pay 0
  tools Hammer 	Wrench	Printer
  special pickpocket 20
  promotion 17
  requireMod Crime
- boolean build paint
+ outfit none none none none whitet whitet skin bluejeans blackshoes default default
+ boolean build paint useCrimeCars thief
 
 // Average: 0
 ID 17
  name Burglar
  info Breaks into homes and loots safes.
  group 333333
- experience 2000
+ experience 1000
+ careerExperience 100
  pay 0
  tools Hammer 	Wrench	Printer	Picklock
  promotion 4
  requireMod Crime
- boolean build paint hidden breakSafe
+ outfit none none none none whitet whitet skin bluejeans blackshoes default default
+ boolean build paint hidden breakSafe useCrimeCars
 
 // Average: 0
 ID 4
  name Bankrobber
  info Steal from other's bank accounts.
  group 333333
- exerience 4000
+ experience 4000
+ careerExperience 400
  pay 0
  tools Hammer 	Wrench	Printer
  special bankrobbing 50000
  promotion 24
  requireMod Crime
- boolean build paint hidden
+ outfit none none none none whitet whitet skin bluejeans blackshoes default default
+ boolean build paint hidden useCrimeCars
 
 // Average: 1300
 ID 24
@@ -146,13 +179,16 @@ ID 24
  info Only the most intelligent and nimble criminals reach this state.
  group 333333
  experience 8000
+ careerExperience 800
  pay 1300
  payTime 24
  tools Hammer 	Wrench	Printer	Picklock
+ special bankrobbing 50000
  items crowbarItem mac10Item P90Item P90SItem KrakenItem shotgunItem
- promotion 23
+ //promotion 23
  requireMod Crime
- boolean build paint hidden
+ outfit none none none none whitet whitet skin bluejeans blackshoes default default
+ boolean build paint hidden useCrimeCars breakSafe
 
 // Average: 0
 ID 5
@@ -160,10 +196,12 @@ ID 5
  info Hunt for bounties to gain money.
  group 333333
  experience 1000
+ careerExperience 100
  pay 0
  tools Hammer 	Wrench	Printer
  requireMod Crime
- boolean build paint gainBounty
+ outfit none none none none whitet whitet skin bluejeans blackshoes default default
+ boolean build paint gainBounty useCrimeCars
 
 //*****************************************************************************
 //						Law Enforcement Career
@@ -173,12 +211,14 @@ ID 22
  info Keeps inmates in jail.
  group CCCC00
  experience 150
+ careerExperience 0
  pay 10
  payTime 6 18
- tools Hammer 	Wrench	Printer	Jail Baton
+ tools Hammer 	Wrench	Printer	Baton
  promotion 6
  requireMod Crime
- boolean build paint clean
+ outfit none copHat none none copShirt copShirt skin blackPants blackShoes default Mod-Police
+ boolean build paint clean usePoliceCars law usePoliceCars
 
 // Average: 70
 ID 6
@@ -186,12 +226,14 @@ ID 6
  info Jails criminals.
  group CCCC00
  experience 500
+ careerExperience 50
  pay 10
  payTime 8 16
  tools Hammer 	Wrench	Printer	Baton
  promotion 7
  requireMod Crime
- boolean build paint clean hidden
+ outfit none copHat none none copShirt copShirt skin blackPants blackShoes default Mod-Police
+ boolean build paint clean hidden law usePoliceCars
 
 // Average: 280
 ID 7
@@ -199,13 +241,15 @@ ID 7
  info Jails criminals.
  group CCCC00
  experience 2000
+ careerExperience 200
  pay 40
  payTime 9 17
  tools Hammer 	Wrench	Printer	Baton
  special demerits
  promotion 8
  requireMod Crime
- boolean build paint clean hidden
+ outfit none copHat none none copShirt copShirt skin blackPants blackShoes default Mod-Police
+ boolean build paint clean hidden usePoliceCars law usePoliceCars
 
 // Average: 650
 ID 8
@@ -213,25 +257,27 @@ ID 8
  info Jails criminals. Can pardon people.
  group CCCC00
  experience 4000
+ careerExperience 400
  pay 50
  payTime 7 21
  tools Hammer 	Wrench	Printer	Baton
- promotion 11
  requireMod Crime
- boolean build paint clean hidden pardon
+ outfit none copHat none none copShirt copShirt skin blackPants blackShoes default Mod-Police
+ boolean build paint clean hidden pardon usePoliceCars law usePoliceCars
 
 // Average: 1100
 ID 11
- name Agent
- info Has the license to kill and can gain bounties, but doesn't have a Baton.
- group CCCC00
+ name Lawyer
+ info Has the ability to clear records and bail people out of jail at a police computer.
+ group 0000CC
  experience 8000
- pay 50
+ careerExperience 800
+ pay 0
  paytime 1 24
  tools Hammer 	Wrench	Printer
- promotion 23
  requireMod Crime
- boolean build paint clean gainBounty hidden hideName pardon immunity
+ outfit keep keep keep keep blackshirt blackshirt skingen blackpants blackshoes default Mod-Suit
+ boolean build paint pardon clearRecord
 
 //*****************************************************************************
 //						Business Career
@@ -241,11 +287,13 @@ ID 16
  info The very first job to success.
  group 0000CC
  experience 0
+ careerExperience 0
  pay 50
  payTime 12
  tools Hammer 	Wrench	Printer
  promotion 12
- boolean build paint
+ outfit keep keep keep keep blackshirt blackshirt skin blackPants blackshoes default Mod-Suit
+ boolean build paint sellItems
 
 // Average: 300
 ID 12
@@ -253,12 +301,27 @@ ID 12
  info Sells various items, tools and weapons.
  group 0000CC
  experience 300
+ careerExperience 30
  pay 300
  payTime 21
  tools Hammer 	Wrench	Printer
  items hammerItem wrenchItem printGun crowbarItem mac10Item P90Item P90SItem KrakenItem shotgunItem hrgrenadeItem nameGun
- promotion 10
- boolean build paint food hidden
+ //promotion 10
+ outfit keep keep keep keep blackshirt blackshirt skin blackPants blackshoes default Mod-Suit
+ boolean build paint food hidden sellItems
+
+// Average: 300
+//ID 27
+// name Tailor
+ //info Tailors weave clothes for people to wear.
+ //group 0000CC
+// experience 300
+// pay 300
+// payTime 21
+// tools Hammer 	Wrench	Printer
+// items hammerItem wrenchItem printGun crowbarItem mac10Item P90Item P90SItem KrakenItem shotgunItem hrgrenadeItem nameGun
+// outfit keep keep keep keep blackshirt blackshirt skin blackPants blackshoes default Mod-Suit
+// boolean build paint sellClothes
 
 // Average: 320
 ID 10
@@ -266,11 +329,13 @@ ID 10
  info Buy and sell lots.
  group 0000CC
  experience 4000
+ careerExperience 400
  pay 40
  payTime 12 18
  tools Hammer 	Wrench	Printer
  promotion 18
  requireMod RealEstate
+ outfit keep keep keep keep blackshirt blackshirt skin blackPants blackshoes default Mod-Suit
  boolean build paint sellable hidden
 
 // Average: 300
@@ -279,12 +344,14 @@ ID 18
  info Manages multiple lots.
  group 0000CC
  experience 6000
+ careerExperience 600
  pay 300
  payTime 21
  tools Hammer 	Wrench	Printer
  special taxlimit 60
  promotion 13
  requireMod RealEstate
+ outfit keep keep keep keep blackshirt blackshirt skin blackPants blackshoes default Mod-Suit
  boolean build paint hidden industrial landplot
 
 // Average: 1400
@@ -293,12 +360,14 @@ ID 13
  info Top job. Huge income.
  group 0000CC
  experience 8000
+ careerExperience 800
  pay 200
  payTime 10 18
  tools Hammer 	Wrench	Printer
  items hammerItem wrenchItem printGun crowbarItem mac10Item P90Item P90SItem KrakenItem shotgunItem hrgrenadeItem nameGun
- promotion 23
+ //promotion 23
  requireMod RealEstate
+ outfit keep keep keep keep blackshirt blackshirt skin blackPants blackshoes default Mod-Suit
  boolean build paint hidden industrial sellable
 
 //*****************************************************************************
@@ -309,11 +378,13 @@ ID 14
  info Heal people.
  group CC00CC
  experience 200
+ careerExperience 0
  pay 25
  payTime 9 21
  tools Hammer 	Wrench	Printer
  special heal 10
  promotion 15
+ outfit DrKleiner DrKleiner DrKleiner DrKleiner whitet whitet brightbluegloves whitet blackshoes DrKleiner DrKleiner
  boolean build paint
 
 // Average: 1015
@@ -322,24 +393,28 @@ ID 15
  info Heals people.
  group CC00CC
  experience 6000
+ careerExperience 600
  pay 145
  payTime 10 18
  tools Hammer 	Wrench	Printer
  special heal 30
+ outfit DrKleiner DrKleiner DrKleiner DrKleiner whitet whitet brightbluegloves whitet blackshoes DrKleiner DrKleiner
  boolean build paint hidden
 
 //*****************************************************************************
-//						Civic Career
+//						Political Career
 // Average: 5000
 ID 23
  name Mayor
  info Clear peoples record and pardon people.
- group FFCC00
+ group CCCC00
  experience 12000
+ careerExperience 0
  pay 5000
  payTime 6
  tools Hammer 	Wrench	Printer
  item hammerItem wrenchItem printGun crowbarItem mac10Item P90Item P90SItem KrakenItem shotgunItem hrgrenadeItem nameGun
+ outfit keep keep keep keep blueshirt blueshirt skin bluePants blackshoes default Mod-Suit
  boolean build paint industrial landplot placeBounty hidden pardon clearRecord
 
 //*****************************************************************************
@@ -350,7 +425,9 @@ ID 26
  info Jailed criminals.
  group FFFFFF
  experience 0
+ careerExperience 0
  pay 0
+ outfit none none none none jumpsuit jumpsuit skin jumpsuit jumpsuit
  boolean paint hidden
 
 //*****************************************************************************
@@ -361,15 +438,16 @@ ID 26
 //*****************************************************************************
 //						Admin Career
 // Average: 5000
-ID 1337
- name Admin
- info Admin only.
- group FFCC00
- experience 50000
- pay 5000
- paytime 6
- tools Hammer 	Wrench	Printer
- items hammerItem wrenchItem printGun
- special demerits
- datablock PlayerStandardArmor
- boolean build paint sellable industrial landplot placeBounty gainBounty hidden hideName pardon immunity clearRecord
+//ID 1337
+// name Admin
+// info Admin only.
+// group FFCC00
+// experience 50000
+ //pay 5000
+ //paytime 6
+ //tools Hammer 	Wrench	Printer
+// items hammerItem wrenchItem printGun
+// special demerits
+// datablock PlayerStandardArmor
+// outfit keep keep keep keep blueshirt blueshirt skin bluePants blackshoes default Mod-Suit
+ //boolean build paint sellable industrial landplot placeBounty gainBounty hidden hideName pardon immunity clearRecord
