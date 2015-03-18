@@ -1,0 +1,66 @@
+v1
+
+TYPE ORE
+ name Copper
+ resources 1
+ hardCore 50
+ colorHasRes 62
+ colorHasNoRes 50
+ reSpawn 30
+ plantAdminOnly 0
+ gemChance 95
+//gemChance 90 means that there is a 10% chance of this ore having a gem.
+ gems Opal Topaz Ruby
+
+TYPE ORE
+ name Tin
+ resources 3
+ hardCore 55
+ colorHasRes 51
+ colorHasNoRes 50
+ reSpawn 40
+ plantAdminOnly 0
+ gemChance 85
+ gems Topaz Ruby Emerald
+
+TYPE ORE
+ name Iron
+ resources 6
+ hardCore 60
+ colorHasRes 49
+ colorHasNoRes 50
+ reSpawn 50
+ plantAdminOnly 0
+ gemChance 75
+ gems Ruby Emerald Sapphire
+
+TYPE ORE
+ name Coal
+ resources 9
+ hardCore 70
+ colorHasRes 52
+ colorHasNoRes 50
+ reSpawn 70
+ plantAdminOnly 1
+ gemChance 60
+ gems Emerald Sapphire Diamond
+
+TYPE ORE
+ name Silver
+ resources 12
+ hardCore 80
+ colorHasRes 47
+ colorHasNoRes 50
+ reSpawn 70
+ plantAdminOnly 1
+ gemChance 0
+
+TYPE ORE
+ name Gold
+ resources 15
+ hardCore 90
+ colorHasRes 3
+ colorHasNoRes 50
+ reSpawn 80
+ plantAdminOnly 1
+ gemChance 0
