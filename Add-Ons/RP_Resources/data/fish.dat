@@ -1,0 +1,55 @@
+v1
+
+TYPE FISH
+ name Goldfish
+ fishGroup common
+ each 1
+ hardCore 50
+
+TYPE FISH
+ name Salmon
+ fishGroup common
+ each 2
+ hardCore 60
+
+TYPE FISH
+ name Bass
+ fishGroup common
+ each 3
+ hardCore 65
+
+TYPE FISH
+ name Cod
+ fishGroup uncommon
+ each 6
+ hardCore 70
+
+TYPE FISH
+ name Carp
+ fishGroup uncommon
+ each 10
+ hardCore 80
+
+TYPE FISH
+ name Barracuda
+ fishGroup uncommon
+ each 15
+ hardCore 85
+
+TYPE FISH
+ name Rainbow Trout
+ fishGroup rare
+ each 20
+ hardCore 90
+
+TYPE FISH
+ name Catfish
+ fishGroup rare
+ each 27
+ hardCore 93
+
+TYPE FISH
+ name Pike
+ fishGroup rare
+ each 36
+ hardCore 97
