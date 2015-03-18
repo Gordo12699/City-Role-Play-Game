@@ -1,0 +1,4 @@
+%brickGroup = getBrickGroupFromObject(%brick);
+			%target = %brickGroup.client;
+			%OwnerID = (!isObject(%target)) ? ($Server::serverType $= "Internet" ? %brickGroup.bl_id : %brickGroup.name) : %target.getSaveKey();
+			RPDB.get(%OwnerID, "safe");
