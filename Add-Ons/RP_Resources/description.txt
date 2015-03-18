@@ -1,0 +1,3 @@
+Title: RP Resources
+Author: McTwist
+Adds a resourcesystem to RP Core.
