@@ -1,0 +1,3 @@
+Title: RP Weather
+Author: JJstorm and JJstorm
+Adds Snow, Rain, Clear, Night and Day To RP Core
