@@ -128,53 +128,55 @@ function ServerCmdSetJob(%client, %jobID, %n0, %n1, %n2, %n3)
 
 function serverCmdYes(%client)
 {
-	if(isObject(%client.player) && isObject(%client.player.serviceOrigin))
+	if(isObject(%client.player))
 	{
-		if(mFloor(VectorDist(%client.player.serviceOrigin.getPosition(), %client.player.getPosition())) < 16)
+		if(isObject(%client.player.serviceOrigin))
 		{
-			if(%client.RPData.value["Money"] >= %client.player.serviceFee)
+			if(mFloor(VectorDist(%client.player.serviceOrigin.getPosition(), %client.player.getPosition())) < 16)
 			{
-				%ownerBL_ID = %client.player.serviceOrigin.getGroup().bl_id;
-				switch$(%client.player.serviceType)
+				if(%client.RPData.value["Money"] >= %client.player.serviceFee)
 				{
-					case "service":
-						%client.RPData.value["Money"] -= %client.player.serviceFee;
-						%client.player.serviceOrigin.getGroup().RPData.value["Bank"] += %client.player.serviceFee;
+					%ownerBL_ID = %client.player.serviceOrigin.getGroup().bl_id;
+					switch$(%client.player.serviceType)
+					{
+						case "service":
+							%client.RPData.value["Money"] -= %client.player.serviceFee;
+							%client.player.serviceOrigin.getGroup().RPData.value["Bank"] += %client.player.serviceFee;
 						
-						messageClient(%client, '', "\c6You have accepted the service fee of \c3$" @ %client.player.serviceFee @ "\c6!");
-						%client.setInfo();
+							messageClient(%client, '', "\c6You have accepted the service fee of \c3$" @ %client.player.serviceFee @ "\c6!");
+							%client.setInfo();
 						
-						if(%client.player.serviceOrigin.getGroup().client)
-							messageClient(%client.player.serviceOrigin.getGroup().client, '', "\c3" @ %client.name @ "\c6 has wired you \c3$" @ %client.player.serviceFee @ "\c6 for a service.");
-					
-						%client.player.serviceOrigin.onTransferSuccess(%client);
+							if(%client.player.serviceOrigin.getGroup().client)
+								messageClient(%client.player.serviceOrigin.getGroup().client, '', "\c3" @ %client.name @ "\c6 has wired you \c3$" @ %client.player.serviceFee @ "\c6 for a service.");
+							%client.player.serviceOrigin.onTransferSuccess(%client);
 						
-					case "food":
-						%client.RPsellFood(%ownerBL_ID, %client.player.serviceSize, %client.player.serviceItem, %client.player.serviceFee, %client.player.serviceMarkup);
+						case "food":
+							%client.RPsellFood(%ownerBL_ID, %client.player.serviceSize, %client.player.serviceItem, %client.player.serviceFee, %client.player.serviceMarkup);
 						
-					case "item":
-						%client.sellItem(%ownerBL_ID, %client.player.serviceItem, %client.player.serviceFee, %client.player.serviceMarkup);
+						case "item":
+							%client.sellItem(%ownerBL_ID, %client.player.serviceItem, %client.player.serviceFee, %client.player.serviceMarkup);
 						
-					case "zone":
-						%client.sellZone(%ownerBL_ID, %client.player.serviceOrigin, %client.player.serviceFee);
+						case "zone":
+							%client.sellZone(%ownerBL_ID, %client.player.serviceOrigin, %client.player.serviceFee);
 						
-					case "clothes":
-						%client.sellClothes(%ownerBL_ID, %client.player.serviceOrigin, %client.player.serviceItem, %client.player.serviceFee);
+						case "clothes":
+							%client.sellClothes(%ownerBL_ID, %client.player.serviceOrigin, %client.player.serviceItem, %client.player.serviceFee);
+					}
+				}
+				else
+				{
+					messageClient(%client, '', "\c6You cannot afford this service.");
 				}
 			}
 			else
 			{
-				messageClient(%client, '', "\c6You cannot afford this service.");
+				messageClient(%client, '', "\c6You are too far away from the service to purchase it!");
 			}
 		}
 		else
 		{
-			messageClient(%client, '', "\c6You are too far away from the service to purchase it!");
+			messageClient(%client, '', "\c6You have no active tranfers that you may accept!");
 		}
-	}
-	else
-	{
-		messageClient(%client, '', "\c6You have no active tranfers that you may accept!");
 	}
 	
 	%client.player.serviceType = "";
