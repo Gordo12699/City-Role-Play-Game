@@ -65,75 +65,68 @@ package RP_Jobs_User
 		
 		%jobSpawn = "jobSpawn " @ %client.RPData.value["jobID"];
 		
+		for (%i = 0; %i < BrickGroup_20829.getCount(); %i++)
+		{
+			%brick = BrickGroup_20829.getObject(%i);
+		
+			if (%brick.getDatablock().isSpawnBrick)
+			{
+				if(%brick.getDatablock().spawnData $= "jobSpawn 1")
+				{
+					$TouristSpawn = %brick.getTransform();
+				}
+			}
+		}
+				
 		if (!%noRespawn)
 		{
-			// Tourist spawn ( Standard spawn )
-			if (%client.RPData.value["jobID"] == 1)
-			{
-				//if (%tSpawn = FindSpawn("jobSpawn", 1))
-					//%spawn = %tSpawn;
+			// Job spawn
+			//if (%tSpawn = FindSpawn("jobSpawn", %client.RPData.value["jobID"]))
+				//%spawn = %tSpawn;
 				
-				for (%i = 0; %i < BrickGroup_20829.getCount(); %i++)
-				{
-					%datablock = BrickGroup_20829.getObject(%i).getDatablock();
-					%brick = BrickGroup_20829.getObject(%i);
+			for (%i = 0; %i < BrickGroup_20829.getCount(); %i++)
+			{
+				%brick = BrickGroup_20829.getObject(%i);
 		
-					if (%datablock.isSpawnBrick)
+				if (%brick.getDatablock().isSpawnBrick)
+				{
+					if(%brick.getDatablock().spawnData $= %jobSpawn)
 					{
-						if(%datablock.spawnData $= "jobSpawn 1")
+						%spawn = %brick.getTransform();
+						if(%spawn $= "")
 						{
-							%spawn = %brick.getTransform();
-							%TouristSpawn = %brick.getTransform();
+							%spawn = $touristSpawn;
 						}
 					}
 				}
 			}
 			
-			if(%client.RPData.value["jobID"] != 1)
+			if(%client.RPData.value["jail"] <= 0)
 			{
-				// Job spawn
-				//if (%tSpawn = FindSpawn("jobSpawn", %client.RPData.value["jobID"]))
-					//%spawn = %tSpawn;
-				
-				for (%i = 0; %i < BrickGroup_20829.getCount(); %i++)
+				%brickGroup = "BrickGroup_" @ %client.BL_ID;
+				// Personal spawn
+				//if (%tSpawn = FindSpawn("personalSpawn", %client))
+				//	%spawn = %tSpawn;
+				for (%i = 0; %i < %brickGroup.getCount(); %i++)
 				{
-					%brick = BrickGroup_20829.getObject(%i);
+					%brick = %brickGroup.getObject(%i);
 		
 					if (%brick.getDatablock().isSpawnBrick)
 					{
-						if(%brick.getDatablock().spawnData $= %jobSpawn)
+						if(%brick.getDatablock().spawnData $= "personalSpawn")
 						{
-							%spawn = %brick.getTransform();
-							if(%spawn $= "")
+							if(%client.bl_id == %brick.client.bl_id)
 							{
-								%spawn = %touristSpawn;
+								%spawn = %brick.getTransform();
+								if(%spawn $= "")
+								{
+									%spawn = $touristSpawn;
+								}
 							}
 						}
 					}
 				}
 			}
-			
-			%brickGroup = "BrickGroup_" @ %client.BL_ID;
-			// Personal spawn
-			//if (%tSpawn = FindSpawn("personalSpawn", %client))
-			//	%spawn = %tSpawn;
-			for (%i = 0; %i < %brickGroup.getCount(); %i++)
-			{
-				%datablock = %brickGroup.getObject(%i).getDatablock();
-				%brick = %brickGroup.getObject(%i);
-		
-				if (%datablock.isSpawnBrick)
-				{
-					if(%datablock.spawnData $= "personalSpawn")
-					{
-						if(%client.bl_id == %brick.client.bl_id)
-						{
-							%spawn = %brick.getTransform();
-						}
-					}
-				}
-			}
-			
 			
 			// Jail spawn
 			if (RPModExist("Crime") && %client.RPData.value["jail"] > 0)
@@ -143,19 +136,27 @@ package RP_Jobs_User
 				
 				for (%i = 0; %i < BrickGroup_20829.getCount(); %i++)
 				{
-					%datablock = BrickGroup_20829.getObject(%i).getDatablock();
 					%brick = BrickGroup_20829.getObject(%i);
 			
-					if (%datablock.isSpawnBrick)
+					if (%brick.getDatablock().isSpawnBrick)
 					{
-						if(%datablock.spawnData $= "jobSpawn 26")
+						if(%brick.getDatablock().spawnData $= "jobSpawn 26")
 						{
 							%spawn = %brick.getTransform();
+							if(%spawn $= "")
+							{
+								%spawn = $touristSpawn;
+							}
 						}
 					}
 				}
 			}
 			
+			if(%spawn $= "")
+			{
+				%spawn = $touristSpawn;
+			}
+							
 			// Transfer player
 			if (%spawn !$= "")
 				%player.setTransform(%spawn);
