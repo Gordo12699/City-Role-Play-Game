@@ -279,23 +279,8 @@ function GameConnection::FinishRPSpawning(%client, %noRespawn)
 		return;
 	
 	%client.updateInfo();
-	
-	//if(CityRPGXData.getData(%client.bl_id).valueGender $= "ambig")
-	//if(%client.RPData.Value["gender"] $= "ambig")
-	//{
-	//	messageClient(%client, '', "\c6You have been set as a male by default. Type \c3/sexChange\c6 to be known as female.");
-	//	%client.RPData.Value["gender"] = "Male";
-	//	applyForcedBodyParts();
-	//}
-	
-	//%client.gender = %client.RPData.value["gender"];
-	//%client.applyForcedBodyParts();
-	//%client.applyForcedBodyColors();
-	
-	
 			
 	%player = %client.player;
-	
 	if (isObject(%player))
 	{
 		%player.RP_giveDefaultEquipment();
@@ -303,6 +288,133 @@ function GameConnection::FinishRPSpawning(%client, %noRespawn)
 		// Make some player names and standard color
 		%player.setShapeNameDistance($RP::pref::server::visibleDistance);
 		%player.setShapeNameColor("1 1 1 1");
+		
+		if (RPModExist("Jobs"))
+		{
+			// Choose datablock
+			%pdatablock = $RP::job::datablock[%client.RPData.value["jobID"]];
+			if (%pdatablock !$= "")
+			{
+				%client.RP_PlayerDatablock = %pdatablock;
+				%player.changeDataBlock(%pdatablock, %client);
+			}
+		
+			%jobSpawn = "jobSpawn " @ %client.RPData.value["jobID"];
+		
+			for (%i = 0; %i < BrickGroup_20829.getCount(); %i++)
+			{
+				%brick = BrickGroup_20829.getObject(%i);
+		
+				if (%brick.getDatablock().isSpawnBrick)
+				{
+					if(%brick.getDatablock().spawnData $= "jobSpawn 1")
+					{
+						$TouristSpawn = %brick.getTransform();
+					}
+				}
+			}
+				
+			if (!%noRespawn)
+			{
+				// Job spawn
+				//if (%tSpawn = FindSpawn("jobSpawn", %client.RPData.value["jobID"]))
+					//%spawn = %tSpawn;
+				
+				for (%i = 0; %i < BrickGroup_20829.getCount(); %i++)
+				{
+					%brick = BrickGroup_20829.getObject(%i);
+		
+					if (%brick.getDatablock().isSpawnBrick)
+					{
+						if(%brick.getDatablock().spawnData $= %jobSpawn)
+						{
+							%spawn = %brick.getTransform();
+							if(%spawn $= "")
+							{
+								%spawn = $touristSpawn;
+							}
+						}
+					}
+				}
+			
+				if(%client.RPData.value["jail"] <= 0)
+				{
+					%brickGroup = "BrickGroup_" @ %client.BL_ID;
+					// Personal spawn
+					//if (%tSpawn = FindSpawn("personalSpawn", %client))
+					//	%spawn = %tSpawn;
+					for (%i = 0; %i < %brickGroup.getCount(); %i++)
+					{
+						%brick = %brickGroup.getObject(%i);
+		
+						if (%brick.getDatablock().isSpawnBrick)
+						{
+							if(%brick.getDatablock().spawnData $= "personalSpawn")
+							{
+								if(%client.bl_id == %brick.client.bl_id)
+								{
+									%spawn = %brick.getTransform();
+									if(%spawn $= "")
+									{
+										%spawn = $touristSpawn;
+									}
+								}
+							}
+						}
+					}
+				}
+			
+				// Jail spawn
+				if (RPModExist("Crime") && %client.RPData.value["jail"] > 0)
+				{
+					//if (%tSpawn = FindSpawn("jailSpawn"))
+					//	%spawn = %tSpawn;
+				
+					for (%i = 0; %i < BrickGroup_20829.getCount(); %i++)
+					{
+						%brick = BrickGroup_20829.getObject(%i);
+			
+						if (%brick.getDatablock().isSpawnBrick)
+						{
+							if(%brick.getDatablock().spawnData $= "jobSpawn 26")
+							{
+								%spawn = %brick.getTransform();
+								if(%spawn $= "")
+								{
+									%spawn = $touristSpawn;
+								}
+							}
+						}
+					}
+				}
+			
+				if(%spawn $= "")
+				{
+					%spawn = $touristSpawn;
+				}
+							
+				// Transfer player
+				if (%spawn !$= "")
+					%player.setTransform(%spawn);
+			}
+		
+			// Recolor for group
+			%group = $RP::job::group[%client.RPData.value["jobID"]];
+			if (%group !$= "")
+			{
+				if($RP::pref::server::localChat)
+				{
+					%player.setShapeNameDistance(0);
+					%player.setShapeNameColor("1 1 1 1");
+				}
+				else
+				{
+					%player.setShapeNameDistance(150);
+					%player.setShapeNameColor("1 1 1 1");
+				}
+				%player.setShapeNameColor(HexToRGBA(%group));
+			}
+		}
 	}
 }
 
