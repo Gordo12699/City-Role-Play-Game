@@ -153,7 +153,7 @@ function serverCmdYes(%client)
 						%client.RPsellFood(%ownerBL_ID, %client.player.serviceSize, %client.player.serviceItem, %client.player.serviceFee, %client.player.serviceMarkup);
 						
 					case "item":
-						%client.sellItem(%ownerBL_ID, %client.player.serviceItem, %client.player.serviceFee, %client.player.serviceMarkup);
+						%client.RPsellItem(%ownerBL_ID, %client.player.serviceItem, %client.player.serviceFee, %client.player.serviceMarkup);
 						
 					case "zone":
 						%client.sellZone(%ownerBL_ID, %client.player.serviceOrigin, %client.player.serviceFee);
