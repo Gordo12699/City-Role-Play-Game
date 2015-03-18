@@ -56,12 +56,14 @@ package RP_Jobs_User
 			return;
 		
 		// Choose datablock
-		%datablock = $RP::job::datablock[%client.RPData.value["jobID"]];
-		if (%datablock !$= "")
+		%pdatablock = $RP::job::datablock[%client.RPData.value["jobID"]];
+		if (%pdatablock !$= "")
 		{
-			%client.RP_PlayerDatablock = %datablock;
-			%player.changeDataBlock(%datablock, %client);
+			%client.RP_PlayerDatablock = %pdatablock;
+			%player.changeDataBlock(%pdatablock, %client);
 		}
+		
+		%jobSpawn = "jobSpawn " @ %client.RPData.value["jobID"];
 		
 		if (!%noRespawn)
 		{
@@ -95,12 +97,11 @@ package RP_Jobs_User
 				
 				for (%i = 0; %i < BrickGroup_20829.getCount(); %i++)
 				{
-					%datablock = BrickGroup_20829.getObject(%i).getDatablock();
 					%brick = BrickGroup_20829.getObject(%i);
 		
-					if (%datablock.isSpawnBrick)
+					if (%brick.getDatablock().isSpawnBrick)
 					{
-						if(%datablock.spawnData $= "jobSpawn " @ %client.RPData.value["jobID"])
+						if(%brick.getDatablock().spawnData $= %jobSpawn)
 						{
 							%spawn = %brick.getTransform();
 							if(%spawn $= "")
