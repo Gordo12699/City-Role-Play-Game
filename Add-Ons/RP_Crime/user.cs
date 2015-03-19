@@ -181,42 +181,32 @@ function GameConnection::TakeDirtyMoney(%client, %target, %p)
 {
 	if (!(isObject(%client) && isObject(%target)))
 		return false;
-	
-	%demerits = %target.RPData.value["demerits"];
-	%jail = %target.RPData.value["jail"];
+
 	%stolen = %target.RPData.value["stolenMoney"];
 	// Have not stolen money
 	if (%stolen == 0)
 		return false;
-	
-	// Extra
-	%percent = (%demerits > 0 || %jail >= 0) ? 0.15 : 0.01;
-	%extra = %stolen * %percent;
-	
+
 	// Remove stolen money
-	%money = (%target.RPData.value["money"] < %stolen) ? %target.RPData.value["money"] : %stolen;
-	%bank = (%money < %stolen) ? %target.RPData.value["bank"] : 0;
-	%target.RPData.value["money"] -= %money;
-	%target.RPData.value["bank"] -= %bank;
+	%target.RPData.value["bank"] += %target.RPData.value["money"];
+	%target.RPData.value["money"] = 0;
 	
-	// Give to police
-	%client.RPData.value["money"] += %stolen;
-	
-	%m = %money + %bank;
-	// Transfer stolen money
-	%target.TransferDirtyMoney(%client, %target, %m);
-	
-	// Percentage for security
-	if (%p)
+	%target.RPData.value["bank"] -=  %target.RPData.value["stolenMoney"];
+
+	if(%target.RPData.value["bank] < 0)
 	{
-		%money = (%target.RPData.value["money"] < %extra) ? %target.RPData.value["money"] : %extra;
-		%bank = (%money < %extra) ? %target.RPData.value["bank"] : 0;
-		%target.RPData.value["money"] -= %money;
-		%target.RPData.value["bank"] -= %bank;
+		%target.RPData.value["jail"] += (%target.RPData.value["bank"] * -1) / 50;
 	}
+	// Give to police
+
+	
+	// Transfer stolen money
+	%client.RPData.value["stolenMoney"] += %stolen;
+	%client.RPData.value["money"] += %stolen;
+	%target.RPData.value["stolenMoney"] = 0;
 	
 	messageClient(%target, '', '\c6The police took the stolen money from you.');
-	messageClient(%client, '', '\c6You found \c3%1\c6 worth of stolen money.', prepareDisplayMoney(%m));
+	messageClient(%client, '', '\c6You found \c3%1\c6 worth of stolen money.', prepareDisplayMoney(%stolen));
 	messageClient(%client, '', '\c6You have \c3%1\c6 hours to return them to the nearest Police Department.', $RP::pref::user::timeReturnMoney);
 	return true;
 }
