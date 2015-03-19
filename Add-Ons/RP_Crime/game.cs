@@ -87,10 +87,7 @@ package RP_Crime_Game
 			{
 				%jail--;
 				RPDB.set(getWord($RP::jailList, %i), "jail", %jail);
-			}
-			
-			if (%jail > 0)
-			{
+				
 				// Is online
 				if (isObject(%inmate))
 				{
@@ -101,13 +98,18 @@ package RP_Crime_Game
 					%inmate.displayInfo();
 				}
 			}
+			
+			if (%jail > 0)
+			{
+				
+			}
 			else
 			{
 				RPDB.set(getWord($RP::jailList, %i), "tools", "");
 				RemoveFromJailList(getWord($RP::jailList, %i));
 				// Change job
 				if (RPModExist("Jobs"))
-					RPDB.set(getWord($RP::jailList, %i), "jobID", 2); //Set Inmate's job to Civilian
+					RPDB.set(%inmate, "jobID", 2); //Set Inmate's job to Civilian
 	
 				// Is online
 				if (isObject(%inmate))
@@ -116,7 +118,7 @@ package RP_Crime_Game
 					if (isObject(%inmate.player))
 						%inmate.player.delete();
 					%inmate.spawnPlayer();
-					messageClient(%client, '', "\c6 - You have been let out of prison.");
+					messageClient(%inmate, '', "\c6 - You have been let out of prison.");
 				}
 				return true;
 			}
