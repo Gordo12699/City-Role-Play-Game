@@ -193,12 +193,10 @@ function GameConnection::TakeDirtyMoney(%client, %target, %p)
 	
 	%target.RPData.value["bank"] -=  %target.RPData.value["stolenMoney"];
 
-	if(%target.RPData.value["bank] < 0)
+	if(%target.RPData.value["bank"] <= -1)
 	{
-		%target.RPData.value["jail"] += (%target.RPData.value["bank"] * -1) / 50;
+		%target.RPData.value["jail"] += ((%target.RPData.value["bank"] * -1) / 50);
 	}
-	// Give to police
-
 	
 	// Transfer stolen money
 	%client.RPData.value["stolenMoney"] += %stolen;
