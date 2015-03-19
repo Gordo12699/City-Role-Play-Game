@@ -54,6 +54,8 @@ package RP_Crime_Game
 	// RP Tick
 	function RPTick()
 	{
+		Parent::RPTick();
+		
 		// Criminal activities
 		%TCO = $RP::pref::timeCriminalOffset; // Time Criminal Offset
 		%TCA = $RP::pref::timeCriminalAmount; // Time Criminal Amount
@@ -129,7 +131,6 @@ package RP_Crime_Game
 				// messageClient(%client, '', '\c6 - You have \c3%1\c6 day%2 left in Prison.', %daysLeft, %daySuffix);
 			// }
 		// }
-		return	Parent::RPTick();
 	}
 	
 	// RP Tick ID
