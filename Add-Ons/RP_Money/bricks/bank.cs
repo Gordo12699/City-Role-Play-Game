@@ -175,6 +175,7 @@ function BankBrickData::parseData(%datablock, %client, %text)
 			messageClient(%client, '', '\c6You have withdrawn \c3%1\c6.', prepareDisplayMoney(getMetricPrefix(%number)));
 			%client.RPData.value["bank"] -= %number;
 			%client.RPData.value["money"] += %number;
+			messageClient(%client, '', '\c6You now have \c3%1\c6 in your bank account.', prepareDisplayMoney(getMetricPrefix(%client.RPData.value["bank"])));
 			
 		// Deposit money
 		case 2.1:
