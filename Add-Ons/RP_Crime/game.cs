@@ -81,18 +81,18 @@ package RP_Crime_Game
 		for (%i = 0; %i < getWordCount($RP::jailList); %i++)
 		{
 			%jail = RPDB.get(getWord($RP::jailList, %i), "jail");
+			%jail--;
+			RPDB.set(getWord($RP::jailList, %i), "jail", %jail);
+			
 			%inmate = findClientByName(RPDB.get(getWord($RP::jailList, %i), "name"));
 			
-			if (%jail >= 1)
+			if (%jail > 0)
 			{
-				%jail--;
-				RPDB.set(getWord($RP::jailList, %i), "jail", %jail);
-				
 				// Is online
 				if (isObject(%inmate))
 				{
 					if(%jail > 1)
-					%hourSuffix = "s";
+						%hourSuffix = "s";
 						
 					messageClient(%inmate, '', '\c6 - You have \c3%1\c6 hour%2 left in prison.', %inmate.RPData.value["jail"], %hourSuffix);
 					%inmate.displayInfo();
@@ -101,11 +101,9 @@ package RP_Crime_Game
 			else
 			{
 				RPDB.set(getWord($RP::jailList, %i), "tools", "");
+				RPDB.set(getWord($RP::jailList, %i), "jobID", "2");
 				RemoveFromJailList(getWord($RP::jailList, %i));
-				// Change job
-				if (RPModExist("Jobs"))
-					RPDB.set(getWord($RP::jailList, %i), "jobID", 2); //Set Inmate's job to Civilian
-	
+				
 				// Is online
 				if (isObject(%inmate))
 				{
@@ -114,23 +112,12 @@ package RP_Crime_Game
 						%inmate.player.delete();
 					%inmate.spawnPlayer();
 					messageClient(%inmate, '', "\c6 - You have been let out of prison.");
+					%inmate.displayInfo();
 				}
-				return true;
+				
+				%i--;
 			}
 		}
-			
-		// if(getWord(%so.valueJailData, 1))
-		// {
-			// if(%ticks = getWord(%so.valueJailData, 1) > 1)
-			// {
-				// %daysLeft = (getWord(%so.valueJailData, 1) - 1);
-			
-				// if(%daysLeft > 1)
-					// %daySuffix = "s";
-				
-				// messageClient(%client, '', '\c6 - You have \c3%1\c6 day%2 left in Prison.', %daysLeft, %daySuffix);
-			// }
-		// }
 	}
 	
 	// RP Tick ID
@@ -257,44 +244,6 @@ function CheckCriminal(%key)
 		return false;
 	
 	RemoveFromCriminalList(%key);
-	return true;
-}
-
-// Check prisioners
-function CheckPrisioner(%key)
-{
-	%jail = RPDB.get(%key, "jail");
-	%jail--;
-	RPDB.set(%key, "jail", %jail);
-	
-	%client = findClientByName(RPDB.get(%key, "name"));
-	
-	if (%jail > 0)
-	{
-		// Is online
-		if (isObject(%client))
-		{
-			messageClient(%client, '', '\c6 - You have \c3%1\c6 hours left.', (%client.RPData.value["jail"]));
-			%client.displayInfo();
-		}
-		return false;
-	}
-	
-	RPDB.set(%key, "tools", "");
-	RemoveFromJailList(%key);
-	// Change job
-	if (RPModExist("Jobs"))
-		RPDB.set(%key, "jobID", 1);
-	
-	// Is online
-	if (isObject(%client))
-	{
-		// Angus ghost
-		if (isObject(%client.player))
-			%client.player.delete();
-		%client.spawnPlayer();
-		messageClient(%client, '', "\c6 - You have been let out of prison.");
-	}
 	return true;
 }
 
